@@ -40,7 +40,8 @@ def completar_tabela(arquivo, resultado):
     df['CNPJ da Empresa'] = df['CNPJ da Empresa']
 
     # Merge dos dois DataFrames
-    resultado_final = pd.merge(resultado, df[['Produto', 'CNPJ da Empresa']], on='Produto', how='left')
+    # resultado_final = pd.merge(resultado, df[['Produto', 'CNPJ da Empresa']], on='Produto', how='left')
+    resultado_final = pd.merge(resultado, df[['Produto', 'CNPJ da Empresa', 'Valor Atualizado']], on='Produto', how='left')
     
     return resultado_final
 
@@ -52,4 +53,4 @@ resultado_final = completar_tabela(arquivo2, resultado)
 
 resultado_final['Mensagem'] = resultado_final.apply(formatar_mensagem, axis=1)
 
-resultado_final.to_excel('resultado2.xlsx', index=False)
+resultado_final.to_excel('resultado3.xlsx', index=False)
