@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 
 def calcular_preco_medio(arquivo):
     df = pd.read_excel(arquivo)
@@ -29,15 +30,15 @@ def calcular_preco_medio(arquivo):
 def formatar_mensagem(row):
     return f"{row['Produto']} quantidade {row['Quantidade_total']} e com preço médio de R$ {row['Preço Médio']:.2f}"
 
-def formatar_cnpj(cnpj):
-    print(cnpj)
-    return str(cnpj).zfill(14)
+
 
 def completar_tabela(arquivo, resultado):  
     df = pd.read_excel(arquivo)
     df['Produto'] = df['Produto'].str.split(' ').str[0]
+    # df['CNPJ da Empresa'] = df['CNPJ da Empresa']
+    
     df['CNPJ da Empresa'] = df['CNPJ da Empresa']
-    formatar_cnpj(df['CNPJ da Empresa'])
+
     # Merge dos dois DataFrames
     resultado_final = pd.merge(resultado, df[['Produto', 'CNPJ da Empresa']], on='Produto', how='left')
     
